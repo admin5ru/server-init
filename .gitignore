@@ -1,0 +1,12 @@
+# Real inventory and variables (contain IPs, keys, usernames)
+inventory/hosts.yml
+group_vars/all.yml
+
+# Ansible
+*.retry
+.vault_password
+
+# Python
+__pycache__/
+.venv/
+*.pyc

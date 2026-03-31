@@ -1,0 +1,29 @@
+---
+- name: Create additional users
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    shell: /bin/bash
+    create_home: true
+  loop: "{{ additional_users }}"
+
+- name: Deploy SSH keys for additional users
+  ansible.posix.authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.public_key }}"
+  loop: "{{ additional_users }}"
+
+- name: Configure sudo for additional users
+  ansible.builtin.copy:
+    content: "{{ item.username }} ALL=(ALL) NOPASSWD:ALL\n"
+    dest: "/etc/sudoers.d/{{ item.username }}"
+    mode: "0440"
+    validate: "visudo -cf %s"
+  when: item.sudo | default(false)
+  loop: "{{ additional_users }}"
+
+- name: Remove sudo for additional users without sudo flag
+  ansible.builtin.file:
+    path: "/etc/sudoers.d/{{ item.username }}"
+    state: absent
+  when: not (item.sudo | default(false))
+  loop: "{{ additional_users }}"

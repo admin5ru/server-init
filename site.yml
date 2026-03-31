@@ -1,0 +1,10 @@
+---
+- name: Server initialization
+  hosts: servers
+  become: true
+  remote_user: "{{ 'root' if use_root_login | default(false) else admin_user }}"
+  roles:
+    - common
+    - sshd
+    - fail2ban
+    - users
