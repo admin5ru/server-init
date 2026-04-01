@@ -1,0 +1,5 @@
+- name: Install Docker packages
+  ansible.builtin.pacman:
+    name:
+      - docker
+      - docker-compose

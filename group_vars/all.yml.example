@@ -15,3 +15,8 @@ sshd_port: 22
 fail2ban_bantime: 3600
 fail2ban_findtime: 600
 fail2ban_maxretry: 5
+
+# docker_users:
+#   - "{{ admin_user }}"
+# docker_log_max_size: "10m"
+# docker_log_max_file: "3"

@@ -1,0 +1,20 @@
+- name: Install prerequisites
+  ansible.builtin.dnf:
+    name:
+      - dnf-plugins-core
+
+- name: Add Docker repository
+  ansible.builtin.yum_repository:
+    name: docker-ce
+    description: Docker CE Stable
+    baseurl: https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }}/$releasever/$basearch/stable
+    gpgcheck: true
+    gpgkey: https://download.docker.com/linux/{{ ansible_facts['distribution'] | lower }}/gpg
+
+- name: Install Docker packages
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin

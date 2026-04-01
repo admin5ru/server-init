@@ -8,6 +8,7 @@ Ansible playbook for basic Linux server initialization.
 - Hardens SSH: disables root login and password authentication
 - Installs and configures fail2ban (SSH jail)
 - Adds additional users with SSH keys and optional sudo
+- Installs Docker from official repos and configures daemon (log rotation, live-restore)
 
 ## Requirements
 
@@ -35,6 +36,11 @@ cp group_vars/all.yml.example group_vars/all.yml
 | `fail2ban_bantime` | `3600` | Ban duration in seconds |
 | `fail2ban_findtime` | `600` | Time window for counting failures |
 | `fail2ban_maxretry` | `5` | Max failures before ban |
+| `docker_users` | `[admin_user]` + sudo users | Users added to the `docker` group |
+| `docker_log_max_size` | `10m` | Max size of a container log file |
+| `docker_log_max_file` | `3` | Max number of rotated log files per container |
+
+Docker variables are commented out in `all.yml.example` — they have sensible defaults and only need to be uncommented if you want to override them.
 
 ### inventory/hosts.yml (per host)
 

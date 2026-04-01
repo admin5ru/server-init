@@ -1,0 +1,12 @@
+docker_users: >-
+  {{
+    [admin_user] + (
+      additional_users
+      | selectattr('sudo')
+      | map(attribute='username')
+      | list
+    )
+  }}
+
+docker_log_max_size: "10m"
+docker_log_max_file: "3"
