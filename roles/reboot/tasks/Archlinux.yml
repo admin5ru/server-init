@@ -1,0 +1,19 @@
+---
+- name: Get running kernel version
+  ansible.builtin.command: uname -r
+  register: running_kernel
+  changed_when: false
+
+- name: Get installed kernel versions
+  ansible.builtin.find:
+    paths: /usr/lib/modules
+    file_type: directory
+  register: installed_kernels
+
+- name: Schedule reboot
+  ansible.builtin.command: /bin/true
+  vars:
+    installed_versions: "{{ installed_kernels.files | map(attribute='path') | map('basename') | list }}"
+  notify: Reboot server
+  when: running_kernel.stdout not in installed_versions
+  changed_when: running_kernel.stdout not in installed_versions

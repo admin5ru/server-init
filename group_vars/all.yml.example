@@ -1,9 +1,6 @@
 admin_user: admin
 admin_user_ssh_public_key: "ssh-ed25519 AAAA... you@host"
 
-# true for first run (connect as root), false after admin user exists
-use_root_login: true
-
 # additional_users:
 #   - username: deployer
 #     public_key: "ssh-ed25519 AAAA... deployer@host"

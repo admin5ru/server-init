@@ -1,0 +1,11 @@
+---
+- name: Check if reboot required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required_file
+
+- name: Schedule reboot
+  ansible.builtin.command: /bin/true
+  notify: Reboot server
+  when: reboot_required_file.stat.exists
+  changed_when: reboot_required_file.stat.exists

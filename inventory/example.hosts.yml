@@ -7,5 +7,8 @@ all:
         # server1:
         #   ansible_host: 203.0.113.10
         #   ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+        #   use_root_login: true
         # server2:
         #   ansible_host: 203.0.113.11
+        #   ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+        #   use_root_login: false

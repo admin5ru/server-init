@@ -8,3 +8,4 @@
     - sshd
     - fail2ban
     - users
+    - reboot
