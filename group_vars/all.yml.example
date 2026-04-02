@@ -1,6 +1,9 @@
 admin_user: admin
 admin_user_ssh_public_key: "ssh-ed25519 AAAA... you@host"
 
+root_password: "{{ vault_root_password }}"
+# admin_password: "{{ vault_admin_password }}"
+
 # additional_users:
 #   - username: deployer
 #     public_key: "ssh-ed25519 AAAA... deployer@host"

@@ -1,6 +1,7 @@
 # Real inventory and variables (contain IPs, keys, usernames)
 inventory/hosts.yml
-group_vars/all.yml
+group_vars/all/vars.yml
+group_vars/all/vault.yml
 
 # Ansible
 *.retry

@@ -1,4 +1,12 @@
 ---
+- name: Set root password
+  ansible.builtin.user:
+    name: root
+    password: "{{ root_password | password_hash('sha512') }}"
+    update_password: always
+  no_log: true
+  when: root_password is defined
+
 - name: Create admin user
   ansible.builtin.user:
     name: "{{ admin_user }}"
@@ -6,6 +14,14 @@
     create_home: true
     groups: sudo
     append: true
+
+- name: Set admin user password
+  ansible.builtin.user:
+    name: "{{ admin_user }}"
+    password: "{{ admin_password | password_hash('sha512') }}"
+    update_password: always
+  no_log: true
+  when: admin_password is defined
 
 - name: Deploy SSH key for admin user
   ansible.posix.authorized_key:
