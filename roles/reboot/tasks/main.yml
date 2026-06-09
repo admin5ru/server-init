@@ -1,2 +1,7 @@
 ---
+- name: Reconnect as admin user after reboot (root login is disabled by now)
+  ansible.builtin.set_fact:
+    ansible_user: "{{ admin_user }}"
+  when: use_root_login | default(false)
+
 - ansible.builtin.include_tasks: "{{ ansible_facts['os_family'] }}.yml"

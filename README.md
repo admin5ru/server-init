@@ -68,8 +68,14 @@ Docker variables are commented out in `all.yml.example` — they have sensible d
 | `use_root_login` | `false` | Set to `true` for the first run — connects as root to create the admin user. Set to `false` after the first run, root SSH access will be disabled. |
 
 
-Fill in your values and run:
+Fill in your values and run.
+
+**First run (new server):** set `use_root_login: true` for the host in `inventory/hosts.yml`, then:
 
 ```bash
 uv run ansible-playbook site.yml
 ```
+
+The playbook connects as root, creates the admin user, and disables root SSH access.
+
+**After the first run:** set `use_root_login: false` for that host in `inventory/hosts.yml`. This switch is **manual and required** — root SSH login is now disabled, so subsequent runs connect as `admin_user`. Leaving it `true` will make the next run fail at connection (root login refused).
